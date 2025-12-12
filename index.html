@@ -169,9 +169,12 @@
 						<h2 id="modalTitle"></h2>
 						<p id="modalDescription"></p>
 						<div class="modal-price">
-							<span
-								id="modalPrice"
-								class="price"></span>
+							<div
+								class="modal-original-price"
+								id="modalOriginalPrice"></div>
+							<div
+								class="modal-discount-price"
+								id="modalPrice"></div>
 						</div>
 						<div class="modal-terms">
 							<p style="color: var(--text-light)">
@@ -208,6 +211,22 @@
 							<ul id="modalFeatures"></ul>
 						</div>
 					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Discount Popup Modal -->
+		<div id="discountModal" class="modal">
+			<div class="modal-content discount-modal">
+				<span class="close" id="discountClose">&times;</span>
+				<div class="discount-body">
+					<h2>Limited Time Offer! 🎉</h2>
+					<p>
+						Get <strong>30% OFF</strong> on all products site-wide. Use code
+						<strong>EKBAL30</strong> at checkout.
+					</p>
+					<button class="btn btn-primary" id="claimCouponBtn">Claim Coupon</button>
+					<p class="small">Offer valid for a limited time. Applies once per order.</p>
 				</div>
 			</div>
 		</div>
@@ -266,44 +285,7 @@
 			id="checkoutModal"
 			class="modal">
 			<div class="modal-content">
-				<span
-					class="close"
-					id="checkoutClose"
-					<!--
-					Discount
-					Popup
-					Modal
-					-->
-					<div
-						id="discountModal"
-						class="modal">
-						<div class="modal-content discount-modal">
-							<span
-								class="close"
-								id="discountClose"
-								>&times;</span
-							>
-							<div class="discount-body">
-								<h2>Limited Time Offer! 🎉</h2>
-								<p>
-									Get <strong>30% OFF</strong> on all products
-									site-wide. Use code
-									<strong>EKBAL30</strong> at checkout.
-								</p>
-								<button
-									class="btn btn-primary"
-									id="claimCouponBtn">
-									Claim Coupon
-								</button>
-								<p class="small">
-									Offer valid for a limited time. Applies once
-									per order.
-								</p>
-							</div>
-						</div>
-					</div>
-					>&times;</span
-				>
+				<span class="close" id="checkoutClose">&times;</span>
 				<div style="padding: 1.5rem; color: var(--text-light)">
 					<h3>Checkout Instructions</h3>
 					<p>
@@ -362,9 +344,7 @@
 		</section>
 
 		<!-- Contact Section -->
-		<section
-			id="contact"
-			class="contact">
+		<section id="contact" class="contact">
 			<div class="container">
 				<h2 class="section-title">Get In Touch</h2>
 				<div class="contact-options">
@@ -376,28 +356,17 @@
 						software.
 					</p>
 					<div class="contact-buttons">
-						<a
-							class="btn btn-primary"
-							href="#"
-							id="googleFormBtn"
-							>Order via Google Form</a
-						>
-						<a
-							class="btn btn-primary"
-							href="#"
-							id="discordBtn"
-							>Open Discord Ticket</a
-						>
-						<a
-							class="btn btn-primary whatsapp-btn"
-							id="whatsappBtn"
-							href="https://wa.me/919830175297?text=Hi"
-							target="_blank"
-							rel="noopener noreferrer"
-							><i class="fab fa-whatsapp"></i> Message on
-							WhatsApp</a
-						>
+						<a class="btn btn-primary" href="#" id="googleFormBtn">Order via Google Form</a>
+						<a class="btn btn-primary" href="#" id="discordBtn">Open Discord Ticket</a>
+						<a class="btn btn-primary whatsapp-btn" id="whatsappBtn" href="https://wa.me/919830175297?text=Hi" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Message on WhatsApp</a>
 					</div>
+					<p style="color: var(--text-light); margin-top: 0.75rem">
+						After placing an order please send proof of 50% advance
+						payment in the same channel (Google Form confirmation / Discord ticket / WhatsApp). We'll complete and deliver the remaining upon final payment.
+					</p>
+				</div>
+			</div>
+		</section>
 					<p style="color: var(--text-light); margin-top: 0.75rem">
 						After placing an order please send proof of 50% advance
 						payment in the same channel (Google Form confirmation /
