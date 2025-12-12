@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0" />
+		<title>Guru Studios - Premium Software & Services</title>
+		<link
+			rel="stylesheet"
+			href="css/style.css" />
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+	</head>
+	<body>
+		<!-- Navigation Bar -->
+		<nav class="navbar">
+			<div class="container">
+				<div class="nav-wrapper">
+					<div class="logo">
+						<h1>Guru Studios</h1>
+					</div>
+					<ul class="nav-menu">
+						<li>
+							<a
+								href="#home"
+								class="nav-link active"
+								>Home</a
+							>
+						</li>
+						<li>
+							<a
+								href="#shop"
+								class="nav-link"
+								>Shop</a
+							>
+						</li>
+						<li>
+							<a
+								href="#about"
+								class="nav-link"
+								>About</a
+							>
+						</li>
+						<li>
+							<a
+								href="#contact"
+								class="nav-link"
+								>Contact</a
+							>
+						</li>
+					</ul>
+					<div class="nav-icons">
+						<a
+							href="#"
+							class="nav-icon"
+							><i class="fas fa-search"></i
+						></a>
+						<a
+							href="#"
+							class="nav-icon"
+							><i class="fas fa-user"></i
+						></a>
+						<a
+							href="#"
+							class="nav-icon cart-icon"
+							><i class="fas fa-shopping-cart"></i
+							><span class="cart-count">0</span></a
+						>
+					</div>
+				</div>
+			</div>
+		</nav>
+
+		<!-- Hero Section -->
+		<section
+			id="home"
+			class="hero">
+			<div class="animated-background"></div>
+			<div class="hero-content">
+				<h2>Welcome to Guru Studios</h2>
+				<p>Premium Software, Services & Digital Solutions</p>
+				<button
+					class="btn btn-primary"
+					onclick="document.getElementById('shop').scrollIntoView({behavior: 'smooth'})">
+					Shop Now
+				</button>
+			</div>
+		</section>
+
+		<!-- Shop Section -->
+		<section
+			id="shop"
+			class="shop">
+			<div class="container">
+				<h2 class="section-title">Our Products & Services</h2>
+
+				<!-- Filter Buttons -->
+				<div class="filter-buttons">
+					<button
+						class="filter-btn active"
+						data-filter="all">
+						All
+					</button>
+					<button
+						class="filter-btn"
+						data-filter="software">
+						Software
+					</button>
+					<button
+						class="filter-btn"
+						data-filter="os">
+						Operating Systems
+					</button>
+					<button
+						class="filter-btn"
+						data-filter="gaming">
+						Gaming & Utilities
+					</button>
+					<button
+						class="filter-btn"
+						data-filter="design">
+						Design & Development
+					</button>
+				</div>
+
+				<!-- Products Grid -->
+				<div
+					class="products-grid"
+					id="productsGrid">
+					<!-- Products will be dynamically loaded here -->
+				</div>
+			</div>
+		</section>
+
+		<!-- Modal for Product Details -->
+		<div
+			id="productModal"
+			class="modal">
+			<div class="modal-content">
+				<span class="close">&times;</span>
+				<div class="modal-body">
+					<div class="modal-image">
+						<img
+							id="modalImage"
+							src=""
+							alt="Product" />
+					</div>
+					<div class="modal-info">
+						<h2 id="modalTitle"></h2>
+						<p id="modalDescription"></p>
+						<div class="modal-price">
+							<span
+								id="modalPrice"
+								class="price"></span>
+							<button
+								class="btn btn-primary"
+								onclick="addToCart()">
+								Add to Cart
+							</button>
+						</div>
+						<div class="modal-features">
+							<h4>Features:</h4>
+							<ul id="modalFeatures"></ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Cart Sidebar -->
+		<div
+			class="cart-sidebar"
+			id="cartSidebar">
+			<div class="cart-header">
+				<h3>Shopping Cart</h3>
+				<span class="close-cart">&times;</span>
+			</div>
+			<div
+				class="cart-items"
+				id="cartItems"></div>
+			<div class="cart-footer">
+				<div class="cart-total">
+					<strong>Total: </strong>
+					<span id="cartTotal">$0.00</span>
+				</div>
+				<button class="btn btn-primary btn-block">Checkout</button>
+			</div>
+		</div>
+
+		<!-- Cart Overlay -->
+		<div
+			class="cart-overlay"
+			id="cartOverlay"></div>
+
+		<!-- About Section -->
+		<section
+			id="about"
+			class="about">
+			<div class="container">
+				<h2 class="section-title">About Us</h2>
+				<div class="about-content">
+					<p>
+						Guru Studios is your one-stop destination for premium
+						software, operating systems, design services, and
+						digital solutions. We provide high-quality products at
+						competitive prices with excellent customer support.
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact Section -->
+		<section
+			id="contact"
+			class="contact">
+			<div class="container">
+				<h2 class="section-title">Get In Touch</h2>
+				<div class="contact-form">
+					<input
+						type="email"
+						placeholder="Your Email"
+						required />
+					<textarea
+						placeholder="Your Message"
+						rows="5"
+						required></textarea>
+					<button class="btn btn-primary">Send Message</button>
+				</div>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="footer">
+			<div class="container">
+				<div class="footer-content">
+					<div class="footer-section">
+						<h4>Guru Studios</h4>
+						<p>Premium Software & Digital Solutions</p>
+					</div>
+					<div class="footer-section">
+						<h4>Quick Links</h4>
+						<ul>
+							<li><a href="#shop">Shop</a></li>
+							<li><a href="#about">About</a></li>
+							<li><a href="#contact">Contact</a></li>
+						</ul>
+					</div>
+					<div class="footer-section">
+						<h4>Follow Us</h4>
+						<div class="social-links">
+							<a href="#"><i class="fab fa-facebook"></i></a>
+							<a href="#"><i class="fab fa-twitter"></i></a>
+							<a href="#"><i class="fab fa-discord"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="footer-bottom">
+					<p>&copy; 2025 Guru Studios. All rights reserved.</p>
+				</div>
+			</div>
+		</footer>
+
+		<script src="js/products.js"></script>
+		<script src="js/script.js"></script>
+	</body>
+</html>
