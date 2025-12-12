@@ -12,6 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ============ Setup Event Listeners ============
 function setupEventListeners() {
+	// Search functionality
+	const searchInput = document.getElementById("searchInput");
+	const searchBtn = document.querySelector(".search-btn");
+	if (searchInput && searchBtn) {
+		searchBtn.addEventListener("click", performSearch);
+		searchInput.addEventListener("keypress", (e) => {
+			if (e.key === "Enter") {
+				performSearch();
+			}
+		});
+	}
+
 	// Filter buttons
 	const filterButtons = document.querySelectorAll(".filter-btn");
 	filterButtons.forEach((btn) => {
@@ -94,7 +106,9 @@ function createProductCard(product) {
 	card.innerHTML = `
         <div class="product-image">
             <div class="product-badge">${product.badge}</div>
-            <span style="font-size: 3rem;">${product.icon}</span>
+            <img src="${product.image}" alt="${
+		product.name
+	}" class="product-img" />
         </div>
         <div class="product-info">
             <div class="product-category">${categories[product.category]}</div>
@@ -102,10 +116,16 @@ function createProductCard(product) {
             <p class="product-description">${product.description}</p>
             <div class="product-footer">
                 <span class="product-price">$${product.price.toFixed(2)}</span>
-                <button class="product-btn">Quick View</button>
+                <button class="product-btn">🛒 Buy Now</button>
             </div>
         </div>
     `;
+
+	card.querySelector(".product-btn").addEventListener("click", (e) => {
+		e.stopPropagation();
+		selectedProduct = product;
+		addToCart();
+	});
 
 	card.addEventListener("click", () => {
 		selectedProduct = product;
@@ -124,9 +144,9 @@ function openModal(product) {
 	document.getElementById(
 		"modalPrice"
 	).textContent = `$${product.price.toFixed(2)}`;
-	document.getElementById(
-		"modalImage"
-	).innerHTML = `<div style="font-size: 5rem;">${product.icon}</div>`;
+	const modalImage = document.getElementById("modalImage");
+	modalImage.src = product.image;
+	modalImage.alt = product.name;
 
 	const featuresList = document.getElementById("modalFeatures");
 	featuresList.innerHTML = "";
@@ -351,7 +371,17 @@ function filterByPrice(maxPrice) {
 	});
 }
 
-// ============ Search Functionality (Future Enhancement) ============
+// ============ Search Functionality ============
+function performSearch() {
+	const searchInput = document.getElementById("searchInput");
+	const query = searchInput.value.trim();
+	if (query === "") {
+		renderProducts("all");
+		return;
+	}
+	searchProducts(query);
+}
+
 function searchProducts(query) {
 	const filtered = products.filter(
 		(p) =>
@@ -360,6 +390,11 @@ function searchProducts(query) {
 	);
 	const productsGrid = document.getElementById("productsGrid");
 	productsGrid.innerHTML = "";
+	if (filtered.length === 0) {
+		productsGrid.innerHTML =
+			'<p style="grid-column: 1 / -1; text-align: center; padding: 2rem; color: var(--text-light);">No products found matching your search.</p>';
+		return;
+	}
 	filtered.forEach((product) => {
 		const productCard = createProductCard(product);
 		productsGrid.appendChild(productCard);

@@ -7,7 +7,7 @@ const products = [
 		price: 29.99,
 		badge: "PAID",
 		description: "The fastest and safest Android emulator for PC",
-		icon: "📱",
+		image: "assets/images/bluestacks4.svg",
 		features: [
 			"High performance Android emulation",
 			"Full game controller support",
@@ -22,7 +22,7 @@ const products = [
 		price: 39.99,
 		badge: "LATEST",
 		description: "Latest version with enhanced performance and features",
-		icon: "📱",
+		image: "assets/images/bluestacks5.svg",
 		features: [
 			"Ultra-fast performance",
 			"Modern UI & UX",
@@ -38,7 +38,7 @@ const products = [
 		price: 24.99,
 		badge: "PAID",
 		description: "Professional mobile streaming utility",
-		icon: "🎮",
+		image: "assets/images/msi4.svg",
 		features: [
 			"Mobile to PC streaming",
 			"Game optimization",
@@ -53,7 +53,7 @@ const products = [
 		price: 34.99,
 		badge: "LATEST",
 		description: "Next-generation mobile streaming with advanced features",
-		icon: "🎮",
+		image: "assets/images/msi5.svg",
 		features: [
 			"Ultra-fast streaming",
 			"AI optimization",
@@ -69,7 +69,7 @@ const products = [
 		price: 19.99,
 		badge: "POPULAR",
 		description: "Lightweight and powerful Android emulator",
-		icon: "⚙️",
+		image: "assets/images/emulator.svg",
 		features: [
 			"Lightweight installation",
 			"Quick startup time",
@@ -86,7 +86,7 @@ const products = [
 		price: 49.99,
 		badge: "LITE",
 		description: "Optimized Windows 10 Pro with reduced bloatware",
-		icon: "🪟",
+		image: "assets/images/windows10lite.svg",
 		features: [
 			"Reduced bloatware",
 			"Faster performance",
@@ -101,7 +101,7 @@ const products = [
 		price: 59.99,
 		badge: "FULL",
 		description: "Complete Windows 10 Pro with all features",
-		icon: "🪟",
+		image: "assets/images/windows10full.svg",
 		features: [
 			"Full Windows features",
 			"Enterprise ready",
@@ -116,7 +116,7 @@ const products = [
 		price: 69.99,
 		badge: "LITE",
 		description: "Optimized Windows 11 Pro - faster and cleaner",
-		icon: "🪟",
+		image: "assets/images/windows11lite.svg",
 		features: [
 			"Optimized for speed",
 			"Modern UI",
@@ -131,7 +131,7 @@ const products = [
 		price: 79.99,
 		badge: "LATEST",
 		description: "Complete Windows 11 Pro with all latest features",
-		icon: "🪟",
+		image: "assets/images/windows11full.svg",
 		features: [
 			"Latest Windows 11",
 			"AI integration",
@@ -146,7 +146,7 @@ const products = [
 		price: 39.99,
 		badge: "FREE+",
 		description: "Ubuntu with all drivers pre-installed",
-		icon: "🐧",
+		image: "assets/images/ubuntu.svg",
 		features: [
 			"Latest Ubuntu LTS",
 			"All drivers included",
@@ -161,7 +161,7 @@ const products = [
 		price: 34.99,
 		badge: "DISTRO",
 		description: "Debian with optimized drivers and packages",
-		icon: "🐧",
+		image: "assets/images/debian.svg",
 		features: [
 			"Stable Debian release",
 			"Pre-configured drivers",
@@ -176,7 +176,7 @@ const products = [
 		price: 29.99,
 		badge: "DISTRO",
 		description: "Latest Fedora with cutting-edge software",
-		icon: "🐧",
+		image: "assets/images/fedora.svg",
 		features: [
 			"Latest Fedora release",
 			"Modern development tools",
@@ -193,7 +193,7 @@ const products = [
 		price: 79.99,
 		badge: "DESIGN",
 		description: "Custom professional logo design service",
-		icon: "🎨",
+		image: "assets/images/logo_design.svg",
 		features: [
 			"Custom design",
 			"3-4 revision rounds",
@@ -208,7 +208,7 @@ const products = [
 		price: 299.99,
 		badge: "DESIGN",
 		description: "Complete website design with modern UI/UX",
-		icon: "🎨",
+		image: "assets/images/website_design.svg",
 		features: [
 			"Responsive design",
 			"SEO optimized",
@@ -223,7 +223,7 @@ const products = [
 		price: 499.99,
 		badge: "DEVELOP",
 		description: "Full website development with backend",
-		icon: "💻",
+		image: "assets/images/website_dev.svg",
 		features: [
 			"Frontend + Backend",
 			"Database setup",
@@ -238,7 +238,7 @@ const products = [
 		price: 99.99,
 		badge: "MEDIA",
 		description: "Professional video editing and post-production",
-		icon: "🎥",
+		image: "assets/images/video_edit.svg",
 		features: [
 			"Color grading",
 			"Effects & transitions",
@@ -253,7 +253,7 @@ const products = [
 		price: 49.99,
 		badge: "MEDIA",
 		description: "Professional photo editing and retouching",
-		icon: "📸",
+		image: "assets/images/photo_edit.svg",
 		features: [
 			"Retouching included",
 			"Background removal",
@@ -270,7 +270,7 @@ const products = [
 		price: 9.99,
 		badge: "GAMING",
 		description: "Optimized sensitivity settings for Free Fire",
-		icon: "🎯",
+		image: "assets/images/free_fire_sens.svg",
 		features: [
 			"Pro player settings",
 			"HD graphics optimized",
@@ -285,7 +285,7 @@ const products = [
 		price: 29.99,
 		badge: "UTILITY",
 		description: "Complete PC optimization and cleanup",
-		icon: "⚡",
+		image: "assets/images/pc_optimization.svg",
 		features: [
 			"Performance boost",
 			"Registry cleanup",
@@ -300,7 +300,7 @@ const products = [
 		price: 149.99,
 		badge: "DEVELOP",
 		description: "Custom Discord bot with advanced features",
-		icon: "🤖",
+		image: "assets/images/discord_bot.svg",
 		features: [
 			"Custom commands",
 			"Moderation tools",
@@ -315,7 +315,7 @@ const products = [
 		price: 59.99,
 		badge: "DEVELOP",
 		description: "Advanced TCP bot with multiple features",
-		icon: "🤖",
+		image: "assets/images/tcp_bot.svg",
 		features: [
 			"Multi-function bot",
 			"Auto-management",
@@ -330,7 +330,7 @@ const products = [
 		price: 129.99,
 		badge: "PANEL",
 		description: "Complete gaming panel management system",
-		icon: "📊",
+		image: "assets/images/free_fire_panel.svg",
 		features: [
 			"User dashboard",
 			"Account management",
