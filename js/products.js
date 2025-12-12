@@ -466,6 +466,39 @@ const products = [
 			"Auto-completion setup",
 		],
 	},
+	// Professional Gmail Setup
+	{
+		id: 31,
+		name: "Professional Gmail Setup",
+		category: "design",
+		price: 24.99,
+		badge: "EMAIL",
+		description: "Professional Gmail configuration and optimization",
+		image: "assets/images/Professional Gmail.svg",
+		features: [
+			"Custom domain setup",
+			"Gmail filters & rules",
+			"Signature templates",
+			"Security optimization",
+		],
+	},
+	// Social Media Profile Optimization
+	{
+		id: 32,
+		name: "Social Media Profile Optimization",
+		category: "design",
+		price: 34.99,
+		badge: "SOCIAL",
+		description:
+			"Complete social media profile optimization across all platforms",
+		image: "assets/images/Social Media Profile.svg",
+		features: [
+			"Bio optimization",
+			"Profile aesthetics",
+			"Content calendar setup",
+			"Growth strategy guide",
+		],
+	},
 ];
 
 // Product categories mapping

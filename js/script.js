@@ -2,12 +2,21 @@
 let cart = [];
 let currentFilter = "all";
 let selectedProduct = null;
+// Coupon and discount state
+let cartDiscountPercent = 0;
+let appliedCoupon = null;
 
 // ============ Initialize Application ============
 document.addEventListener("DOMContentLoaded", () => {
 	renderProducts("all");
 	setupEventListeners();
 	loadCartFromStorage();
+	// Show discount popup if not seen
+	const seen = localStorage.getItem("seenDiscountPopup");
+	const discountModal = document.getElementById("discountModal");
+	if (!seen && discountModal) {
+		discountModal.style.display = "block";
+	}
 });
 
 // ============ Setup Event Listeners ============
@@ -160,6 +169,63 @@ function setupEventListeners() {
 				);
 			});
 	});
+
+	// Coupon apply handler (in cart sidebar)
+	const applyCouponBtn = document.getElementById("applyCouponBtn");
+	const couponInput = document.getElementById("couponInput");
+	if (applyCouponBtn && couponInput) {
+		applyCouponBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			applyCoupon(couponInput.value.trim());
+		});
+	}
+
+	const clearCouponBtn = document.getElementById("clearCouponBtn");
+	if (clearCouponBtn) {
+		clearCouponBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			appliedCoupon = null;
+			cartDiscountPercent = 0;
+			localStorage.removeItem("appliedCoupon");
+			localStorage.removeItem("cartDiscountPercent");
+			const couponDiv = document.getElementById("couponMessage");
+			if (couponDiv) {
+				couponDiv.classList.remove("success", "error");
+				couponDiv.textContent = "";
+			}
+			if (couponInput) couponInput.value = "";
+			updateCartUI();
+			showNotification("Coupon removed", "info");
+		});
+	}
+
+	// Discount popup handlers
+	const discountModal = document.getElementById("discountModal");
+	const discountClose = document.getElementById("discountClose");
+	const claimCouponBtn = document.getElementById("claimCouponBtn");
+	const navDiscountBanner = document.getElementById("navDiscountBanner");
+	if (discountClose) {
+		discountClose.addEventListener("click", () => {
+			if (discountModal) {
+				discountModal.style.display = "none";
+				localStorage.setItem("seenDiscountPopup", "true");
+			}
+		});
+	}
+	if (navDiscountBanner && discountModal) {
+		navDiscountBanner.addEventListener("click", (e) => {
+			e.preventDefault();
+			discountModal.style.display = "block";
+		});
+	}
+	if (claimCouponBtn) {
+		claimCouponBtn.addEventListener("click", () => {
+			if (couponInput) couponInput.value = "EKBAL30";
+			applyCoupon("EKBAL30");
+			localStorage.setItem("seenDiscountPopup", "true");
+			if (discountModal) discountModal.style.display = "none";
+		});
+	}
 }
 
 // ============ Render Products ============
@@ -287,10 +353,10 @@ function updateCartUI() {
 	}
 
 	// Display cart items
-	let total = 0;
+	let subtotal = 0;
 	cart.forEach((item) => {
 		const itemTotal = item.price * item.quantity;
-		total += itemTotal;
+		subtotal += itemTotal;
 
 		const cartItem = document.createElement("div");
 		cartItem.className = "cart-item";
@@ -319,9 +385,60 @@ function updateCartUI() {
 		cartItems.appendChild(cartItem);
 	});
 
-	// Update total and count
-	cartTotal.textContent = `$${total.toFixed(2)}`;
+	// Apply discount if any
+	let finalTotal = subtotal;
+	const couponDiv = document.getElementById("couponMessage");
+	if (cartDiscountPercent > 0 && appliedCoupon) {
+		const discountAmount = (subtotal * cartDiscountPercent) / 100;
+		finalTotal = subtotal - discountAmount;
+		cartTotal.textContent = `$${finalTotal.toFixed(
+			2
+		)} (was $${subtotal.toFixed(2)}, saved ${cartDiscountPercent}% )`;
+		if (couponDiv) {
+			couponDiv.classList.add("success");
+			couponDiv.textContent = `Coupon ${appliedCoupon} applied — ${cartDiscountPercent}% off!`;
+		}
+	} else {
+		cartTotal.textContent = `$${subtotal.toFixed(2)}`;
+		if (couponDiv) {
+			couponDiv.classList.remove("success");
+			couponDiv.textContent = ``;
+		}
+	}
 	cartCount.textContent = cart.length;
+}
+
+// Coupon function
+function applyCoupon(code) {
+	const normalized = (code || "").toString().trim().toUpperCase();
+	const couponDiv = document.getElementById("couponMessage");
+	if (!normalized) {
+		if (couponDiv) {
+			couponDiv.classList.add("error");
+			couponDiv.textContent = "Please enter a coupon code";
+		}
+		showNotification("Please enter a coupon code", "error");
+		return false;
+	}
+	if (normalized === "EKBAL30" || normalized === "DISCOUNT30") {
+		cartDiscountPercent = 30;
+		appliedCoupon = normalized;
+		saveCartToStorage();
+		updateCartUI();
+		showNotification("Coupon applied — 30% off", "success");
+		if (couponDiv) {
+			couponDiv.classList.remove("error");
+			couponDiv.classList.add("success");
+			couponDiv.textContent = `Coupon ${appliedCoupon} applied — 30% off!`;
+		}
+		return true;
+	}
+	if (couponDiv) {
+		couponDiv.classList.add("error");
+		couponDiv.textContent = "Invalid coupon code";
+	}
+	showNotification("Invalid coupon", "error");
+	return false;
 }
 
 function toggleCart() {
@@ -340,12 +457,31 @@ function closeCart() {
 
 function saveCartToStorage() {
 	localStorage.setItem("cart", JSON.stringify(cart));
+	if (appliedCoupon) {
+		localStorage.setItem("appliedCoupon", appliedCoupon);
+		localStorage.setItem(
+			"cartDiscountPercent",
+			String(cartDiscountPercent)
+		);
+	} else {
+		localStorage.removeItem("appliedCoupon");
+		localStorage.removeItem("cartDiscountPercent");
+	}
 }
 
 function loadCartFromStorage() {
 	const storedCart = localStorage.getItem("cart");
 	if (storedCart) {
 		cart = JSON.parse(storedCart);
+		updateCartUI();
+	}
+	// Load coupon state if any
+	const storedCoupon = localStorage.getItem("appliedCoupon");
+	if (storedCoupon) {
+		appliedCoupon = storedCoupon;
+		cartDiscountPercent =
+			Number(localStorage.getItem("cartDiscountPercent")) || 0;
+		// Refresh UI to display discount
 		updateCartUI();
 	}
 }

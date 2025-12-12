@@ -2,6 +2,9 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="8" fill="%23dc143c"/><circle cx="16" cy="16" r="6" fill="none" stroke="%23ff6b6b" stroke-width="1" opacity="0.5"/></svg>')
+			16 16,
+		auto;
 }
 
 :root {
@@ -185,6 +188,21 @@ body {
 	align-items: center;
 }
 
+.discount-banner {
+	background: linear-gradient(135deg, var(--primary-red), var(--light-red));
+	color: white;
+	padding: 6px 12px;
+	border-radius: 999px;
+	font-weight: 700;
+	font-size: 0.85rem;
+	text-decoration: none;
+	transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.discount-banner:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 6px 20px rgba(220, 20, 60, 0.3);
+}
+
 .nav-icon {
 	color: var(--text-light);
 	font-size: 1.2rem;
@@ -241,11 +259,11 @@ body {
 }
 
 @keyframes gradientShift {
-	0% {
-		background-position: 0% 50%;
-	}
-	50% {
-		background-position: 100% 50%;
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		cursor: url("assets/images/favicon.svg") 16 16, auto;
 	}
 	100% {
 		background-position: 0% 50%;
@@ -390,7 +408,7 @@ body {
 /* ============ Product Cards ============ */
 .product-card {
 	background: linear-gradient(135deg, var(--darker-bg) 0%, #2a0000 100%);
-	border-radius: 10px;
+	border-radius: 20px;
 	overflow: hidden;
 	cursor: pointer;
 	transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -400,9 +418,11 @@ body {
 }
 
 .product-card:hover {
-	transform: translateY(-15px);
+	transform: translateY(-15px) rotateZ(1deg);
 	border-color: var(--primary-red);
-	box-shadow: 0 15px 40px rgba(220, 20, 60, 0.5);
+	box-shadow: 0 15px 50px rgba(220, 20, 60, 0.6),
+		0 0 30px rgba(220, 20, 60, 0.3);
+	background: linear-gradient(135deg, #2a0000 0%, #4d0000 100%);
 }
 
 .product-image {
@@ -415,6 +435,7 @@ body {
 	justify-content: center;
 	font-size: 4rem;
 	color: var(--primary-red);
+	border-radius: 18px 18px 0 0;
 }
 
 .product-img {
@@ -422,15 +443,16 @@ body {
 	height: 100%;
 	object-fit: contain;
 	padding: 20px;
-	transition: all 0.3s ease;
+	transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .product-card:hover .product-img {
-	transform: scale(1.1);
+	transform: scale(1.15) rotate(2deg);
+	filter: brightness(1.1);
 }
 
 .product-card:hover .product-image {
-	animation: scaleImage 0.4s ease;
+	background: linear-gradient(135deg, #4d0000, #800000);
 }
 
 @keyframes scaleImage {
@@ -438,7 +460,7 @@ body {
 		transform: scale(1);
 	}
 	to {
-		transform: scale(1.1);
+		transform: scale(1.15);
 	}
 }
 
@@ -453,6 +475,19 @@ body {
 	font-size: 0.8rem;
 	font-weight: bold;
 	z-index: 2;
+	animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+	0%,
+	100% {
+		transform: scale(1);
+		box-shadow: 0 0 0 0 rgba(220, 20, 60, 0.7);
+	}
+	50% {
+		transform: scale(1.05);
+		box-shadow: 0 0 0 4px rgba(220, 20, 60, 0);
+	}
 }
 
 .product-info {
@@ -466,6 +501,13 @@ body {
 	letter-spacing: 1px;
 	font-weight: 600;
 	margin-bottom: 0.5rem;
+	opacity: 0.8;
+	transition: opacity 0.3s ease;
+}
+
+.product-card:hover .product-category {
+	opacity: 1;
+	text-shadow: 0 0 10px rgba(220, 20, 60, 0.5);
 }
 
 .product-name {
@@ -473,6 +515,11 @@ body {
 	margin-bottom: 0.5rem;
 	color: var(--text-white);
 	font-weight: 600;
+	transition: color 0.3s ease;
+}
+
+.product-card:hover .product-name {
+	color: var(--light-red);
 }
 
 .product-description {
@@ -480,6 +527,11 @@ body {
 	font-size: 0.9rem;
 	margin-bottom: 1rem;
 	min-height: 2.7rem;
+	transition: color 0.3s ease;
+}
+
+.product-card:hover .product-description {
+	color: var(--text-white);
 }
 
 .product-footer {
@@ -489,16 +541,24 @@ body {
 	margin-top: 1rem;
 	padding-top: 1rem;
 	border-top: 1px solid rgba(220, 20, 60, 0.2);
+	transition: border-color 0.3s ease;
+}
+
+.product-card:hover .product-footer {
+	border-top-color: rgba(220, 20, 60, 0.5);
 }
 
 .product-price {
 	color: var(--accent-gold);
 	font-size: 1.5rem;
 	font-weight: bold;
+	transition: all 0.3s ease;
 }
 
 .product-card:hover .product-price {
-	animation: priceFlash 0.6s ease;
+	color: var(--light-red);
+	font-size: 1.6rem;
+	text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
 }
 
 @keyframes priceFlash {
@@ -516,16 +576,18 @@ body {
 	color: white;
 	border: none;
 	padding: 8px 15px;
-	border-radius: 5px;
+	border-radius: 15px;
 	cursor: pointer;
 	font-weight: 600;
-	transition: all 0.3s ease;
+	transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 	font-size: 0.9rem;
+	box-shadow: 0 3px 10px rgba(220, 20, 60, 0.3);
 }
 
 .product-btn:hover {
 	background: var(--light-red);
-	transform: scale(1.05);
+	transform: scale(1.08) rotate(-2deg);
+	box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
 }
 
 /* ============ Modal ============ */
@@ -561,6 +623,79 @@ body {
 	max-height: 80vh;
 	overflow-y: auto;
 	box-shadow: 0 0 30px rgba(220, 20, 60, 0.5);
+}
+
+/* Discount Modal Styles */
+.discount-modal {
+	max-width: 480px;
+	margin: 2rem auto;
+	border-radius: 16px;
+	padding: 1.5rem;
+}
+.discount-body {
+	text-align: center;
+	color: var(--text-white);
+	padding: 1rem;
+}
+.discount-body h2 {
+	font-size: 1.6rem;
+	color: var(--accent-gold);
+}
+.discount-body p {
+	color: var(--text-light);
+}
+.discount-body .small {
+	font-size: 0.85rem;
+	opacity: 0.8;
+	margin-top: 0.5rem;
+}
+
+/* Coupon Area in Cart */
+.coupon-row {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	margin-bottom: 0.5rem;
+}
+.coupon-row input[type="text"] {
+	flex: 1;
+	padding: 0.5rem 0.75rem;
+	border-radius: 8px;
+	border: 1px dashed rgba(220, 20, 60, 0.3);
+	background: rgba(20, 20, 20, 0.6);
+	color: var(--text-light);
+	outline: none;
+}
+.coupon-row input[type="text"]:focus {
+	border-color: var(--primary-red);
+}
+.coupon-row .btn-secondary {
+	background: #222;
+	color: var(--primary-red);
+	border: 1px solid rgba(220, 20, 60, 0.2);
+}
+.btn-tertiary {
+	background: transparent;
+	color: var(--text-light);
+	border: 1px dashed rgba(255, 255, 255, 0.06);
+	padding: 6px 10px;
+	border-radius: 8px;
+	cursor: pointer;
+}
+.btn-tertiary:hover {
+	border-color: var(--primary-red);
+	color: var(--primary-red);
+}
+.coupon-message {
+	font-size: 0.9rem;
+	color: var(--text-light);
+	margin-top: 0.25rem;
+}
+.coupon-message.success {
+	color: #9be7a0;
+}
+.coupon-message.error {
+	color: #ff7875;
 }
 
 .close {
