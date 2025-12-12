@@ -338,6 +338,134 @@ const products = [
 			"Admin panel included",
 		],
 	},
+	// Windows Terminal Customization
+	{
+		id: 23,
+		name: "Windows Terminal Customization",
+		category: "customization",
+		price: 19.99,
+		badge: "TERMINAL",
+		description: "Professional Windows Terminal themes and configurations",
+		image: "assets/images/windows_terminal.svg",
+		features: [
+			"20+ custom themes",
+			"PowerShell profiles",
+			"Oh-My-Posh integration",
+			"Auto-installation scripts",
+		],
+	},
+	// Linux Terminal Customization
+	{
+		id: 24,
+		name: "Linux Terminal Customization",
+		category: "customization",
+		price: 14.99,
+		badge: "TERMINAL",
+		description: "Beautiful Bash, Zsh, and Fish shell configurations",
+		image: "assets/images/linux_terminal.svg",
+		features: [
+			"15+ shell themes",
+			".bashrc/.zshrc configs",
+			"Plugin setups",
+			"Font recommendations",
+		],
+	},
+	// Mac Terminal Pro
+	{
+		id: 25,
+		name: "macOS Terminal Pro",
+		category: "customization",
+		price: 24.99,
+		badge: "TERMINAL",
+		description: "Premium macOS terminal themes and utilities",
+		image: "assets/images/mac_terminal.svg",
+		features: [
+			"iTerm2 themes",
+			"Homebrew optimization",
+			"Zsh customization",
+			"Developer tools setup",
+		],
+	},
+	// Terminal Icons & Fonts
+	{
+		id: 26,
+		name: "Terminal Icons & Fonts Pack",
+		category: "customization",
+		price: 9.99,
+		badge: "FONTS",
+		description: "50+ terminal fonts and icon packs",
+		image: "assets/images/terminal_fonts.svg",
+		features: [
+			"Nerd fonts collection",
+			"Icon packs included",
+			"Installation scripts",
+			"Font preview guide",
+		],
+	},
+	// NeoVim Setup
+	{
+		id: 27,
+		name: "NeoVim Complete Setup",
+		category: "customization",
+		price: 29.99,
+		badge: "EDITOR",
+		description: "Complete NeoVim configuration with plugins",
+		image: "assets/images/neovim_setup.svg",
+		features: [
+			"Pre-configured plugins",
+			"LSP setup included",
+			"Custom keybindings",
+			"Lua configuration",
+		],
+	},
+	// VS Code Terminal Theme
+	{
+		id: 28,
+		name: "VS Code Terminal Pro",
+		category: "customization",
+		price: 12.99,
+		badge: "EDITOR",
+		description: "Advanced VS Code integrated terminal themes",
+		image: "assets/images/vscode_terminal.svg",
+		features: [
+			"10+ terminal themes",
+			"Font optimization",
+			"Keybinding presets",
+			"Extension recommendations",
+		],
+	},
+	// Prompt Customization Pack
+	{
+		id: 29,
+		name: "Shell Prompt Customization",
+		category: "customization",
+		price: 11.99,
+		badge: "PROMPT",
+		description: "Custom shell prompts for any OS",
+		image: "assets/images/shell_prompt.svg",
+		features: [
+			"30+ prompt designs",
+			"Git integration",
+			"Custom functions",
+			"Quick installer",
+		],
+	},
+	// Docker Terminal Setup
+	{
+		id: 30,
+		name: "Docker Terminal Setup",
+		category: "customization",
+		price: 17.99,
+		badge: "DOCKER",
+		description: "Optimized terminal environment for Docker",
+		image: "assets/images/docker_terminal.svg",
+		features: [
+			"Docker aliases",
+			"Container monitoring",
+			"Compose templates",
+			"Auto-completion setup",
+		],
+	},
 ];
 
 // Product categories mapping
@@ -346,4 +474,5 @@ const categories = {
 	os: "Operating Systems",
 	gaming: "Gaming & Utilities",
 	design: "Design & Development",
+	customization: "Terminal & Customization",
 };

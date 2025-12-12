@@ -12,14 +12,37 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // ============ Setup Event Listeners ============
 function setupEventListeners() {
-	// Search functionality
+	// Search functionality with suggestions
 	const searchInput = document.getElementById("searchInput");
 	const searchBtn = document.querySelector(".search-btn");
+	const searchSuggestions = document.getElementById("searchSuggestions");
+
 	if (searchInput && searchBtn) {
 		searchBtn.addEventListener("click", performSearch);
 		searchInput.addEventListener("keypress", (e) => {
 			if (e.key === "Enter") {
 				performSearch();
+				searchSuggestions.innerHTML = "";
+			}
+		});
+
+		// Show search suggestions
+		searchInput.addEventListener("input", (e) => {
+			const query = e.target.value.trim();
+			if (query.length > 0) {
+				showSearchSuggestions(query);
+			} else {
+				searchSuggestions.innerHTML = "";
+			}
+		});
+
+		// Hide suggestions when clicking outside
+		document.addEventListener("click", (e) => {
+			if (
+				!searchInput.contains(e.target) &&
+				!searchSuggestions.contains(e.target)
+			) {
+				searchSuggestions.innerHTML = "";
 			}
 		});
 	}
@@ -81,6 +104,62 @@ function setupEventListeners() {
 			link.classList.add("active");
 		});
 	});
+
+	// Modal "Add to Cart" with Terms agreement
+	const modalAddBtn = document.getElementById("modalAddBtn");
+	if (modalAddBtn) {
+		modalAddBtn.addEventListener("click", () => {
+			const agree = document.getElementById("agreeTerms");
+			if (agree && !agree.checked) {
+				showNotification(
+					"Please agree to the Terms & Conditions before adding to cart."
+				);
+				return;
+			}
+			addToCart();
+		});
+	}
+
+	// Checkout handler
+	const checkoutBtn = document.getElementById("checkoutBtn");
+	const checkoutModal = document.getElementById("checkoutModal");
+	const checkoutClose = document.getElementById("checkoutClose");
+	if (checkoutBtn && checkoutModal) {
+		checkoutBtn.addEventListener("click", () => {
+			checkoutModal.style.display = "block";
+		});
+	}
+	if (checkoutClose) {
+		checkoutClose.addEventListener("click", () => {
+			checkoutModal.style.display = "none";
+		});
+	}
+
+	// Connect quick contact buttons in header/contact to checkout links
+	const googleFormBtn = document.getElementById("googleFormBtn");
+	const discordBtn = document.getElementById("discordBtn");
+	const checkoutGoogleForm = document.getElementById("checkoutGoogleForm");
+	const checkoutDiscord = document.getElementById("checkoutDiscord");
+
+	// Placeholder: these open '#' by default. You can replace href values with real links.
+	[googleFormBtn, checkoutGoogleForm].forEach((el) => {
+		if (el)
+			el.addEventListener("click", (e) => {
+				e.preventDefault();
+				showNotification(
+					"Open the Google Form link (replace placeholder with real URL)."
+				);
+			});
+	});
+	[discordBtn, checkoutDiscord].forEach((el) => {
+		if (el)
+			el.addEventListener("click", (e) => {
+				e.preventDefault();
+				showNotification(
+					"Open the Discord ticket link (replace placeholder with real URL)."
+				);
+			});
+	});
 }
 
 // ============ Render Products ============
@@ -124,7 +203,7 @@ function createProductCard(product) {
 	card.querySelector(".product-btn").addEventListener("click", (e) => {
 		e.stopPropagation();
 		selectedProduct = product;
-		addToCart();
+		openModal(product);
 	});
 
 	card.addEventListener("click", () => {
@@ -399,4 +478,40 @@ function searchProducts(query) {
 		const productCard = createProductCard(product);
 		productsGrid.appendChild(productCard);
 	});
+}
+
+// ============ Search Suggestions ============
+function showSearchSuggestions(query) {
+	const suggestions = products.filter(
+		(p) =>
+			p.name.toLowerCase().includes(query.toLowerCase()) ||
+			p.description.toLowerCase().includes(query.toLowerCase())
+	);
+
+	const searchSuggestions = document.getElementById("searchSuggestions");
+	searchSuggestions.innerHTML = "";
+
+	if (suggestions.length === 0) {
+		return;
+	}
+
+	const suggestionsList = document.createElement("ul");
+	suggestionsList.className = "suggestions-list";
+
+	suggestions.slice(0, 8).forEach((product) => {
+		const suggestionItem = document.createElement("li");
+		suggestionItem.className = "suggestion-item";
+		suggestionItem.innerHTML = `
+			<i class="fas fa-search"></i>
+			<span>${product.name}</span>
+		`;
+		suggestionItem.addEventListener("click", () => {
+			document.getElementById("searchInput").value = product.name;
+			searchSuggestions.innerHTML = "";
+			searchProducts(product.name);
+		});
+		suggestionsList.appendChild(suggestionItem);
+	});
+
+	searchSuggestions.appendChild(suggestionsList);
 }
