@@ -377,6 +377,38 @@ function showCartNotification() {
 	}, 3000);
 }
 
+// Generic notification (info | success | error)
+function showNotification(message, type = "info") {
+	const notification = document.createElement("div");
+	let background =
+		"linear-gradient(135deg, var(--primary-red), var(--light-red))";
+	if (type === "error")
+		background = "linear-gradient(135deg, #ff4d4f, #ff7875)";
+	if (type === "success")
+		background = "linear-gradient(135deg, #28a745, #9be7a0)";
+
+	notification.style.cssText = `
+		position: fixed;
+		top: 80px;
+		right: 20px;
+		background: ${background};
+		color: white;
+		padding: 1rem 1.5rem;
+		border-radius: 5px;
+		box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+		z-index: 2000;
+		animation: slideInRight 0.3s ease;
+		font-weight: 600;
+	`;
+	notification.textContent = message;
+	document.body.appendChild(notification);
+
+	setTimeout(() => {
+		notification.style.animation = "slideOutRight 0.3s ease";
+		setTimeout(() => notification.remove(), 300);
+	}, 3000);
+}
+
 // ============ Add Animation Styles ============
 const style = document.createElement("style");
 style.textContent = `
