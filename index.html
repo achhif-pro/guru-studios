@@ -51,17 +51,21 @@
 							>
 						</li>
 					</ul>
+					<div class="search-bar">
+						<input
+							type="text"
+							id="searchInput"
+							placeholder="Search products..."
+							class="search-input"
+							autocomplete="off" />
+						<button class="search-btn">
+							<i class="fas fa-search"></i>
+						</button>
+						<div
+							id="searchSuggestions"
+							class="search-suggestions"></div>
+					</div>
 					<div class="nav-icons">
-						<a
-							href="#"
-							class="nav-icon"
-							><i class="fas fa-search"></i
-						></a>
-						<a
-							href="#"
-							class="nav-icon"
-							><i class="fas fa-user"></i
-						></a>
 						<a
 							href="#"
 							class="nav-icon cart-icon"
@@ -123,6 +127,11 @@
 						data-filter="design">
 						Design & Development
 					</button>
+					<button
+						class="filter-btn"
+						data-filter="customization">
+						Terminal & Customization
+					</button>
 				</div>
 
 				<!-- Products Grid -->
@@ -154,9 +163,34 @@
 							<span
 								id="modalPrice"
 								class="price"></span>
+						</div>
+						<div class="modal-terms">
+							<p style="color: var(--text-light)">
+								By ordering you agree to the
+								<strong>Terms & Conditions</strong> below. A 50%
+								advance payment is required to begin delivery
+								for paid items or services. Orders are completed
+								via Google Form, Discord ticket or WhatsApp. You
+								will receive instructions after checkout.
+							</p>
+							<label
+								style="
+									display: flex;
+									gap: 0.5rem;
+									align-items: center;
+									margin-top: 0.5rem;
+								">
+								<input
+									type="checkbox"
+									id="agreeTerms" />
+								<span style="color: var(--text-light)"
+									>I agree to the Terms & Conditions and the
+									50% advance payment policy.</span
+								>
+							</label>
 							<button
 								class="btn btn-primary"
-								onclick="addToCart()">
+								id="modalAddBtn">
 								Add to Cart
 							</button>
 						</div>
@@ -185,7 +219,11 @@
 					<strong>Total: </strong>
 					<span id="cartTotal">$0.00</span>
 				</div>
-				<button class="btn btn-primary btn-block">Checkout</button>
+				<button
+					class="btn btn-primary btn-block"
+					id="checkoutBtn">
+					Checkout
+				</button>
 			</div>
 		</div>
 
@@ -193,6 +231,56 @@
 		<div
 			class="cart-overlay"
 			id="cartOverlay"></div>
+
+		<!-- Checkout Instructions Modal -->
+		<div
+			id="checkoutModal"
+			class="modal">
+			<div class="modal-content">
+				<span
+					class="close"
+					id="checkoutClose"
+					>&times;</span
+				>
+				<div style="padding: 1.5rem; color: var(--text-light)">
+					<h3>Checkout Instructions</h3>
+					<p>
+						Please complete your order by filling our Google Form,
+						opening a Discord ticket, or sending a WhatsApp message
+						with your order details and proof of 50% advance
+						payment.
+					</p>
+					<ul>
+						<li>
+							<a
+								href="#"
+								id="checkoutGoogleForm"
+								>Google Form (Order)</a
+							>
+						</li>
+						<li>
+							<a
+								href="#"
+								id="checkoutDiscord"
+								>Discord Ticket</a
+							>
+						</li>
+						<li>
+							<a
+								href="https://wa.me/919830175297?text=Hi"
+								target="_blank"
+								rel="noopener noreferrer"
+								>WhatsApp: +91 9830175297</a
+							>
+						</li>
+					</ul>
+					<p style="margin-top: 0.5rem">
+						Note: A 50% advance is required. We'll confirm delivery
+						steps after receiving payment.
+					</p>
+				</div>
+			</div>
+		</div>
 
 		<!-- About Section -->
 		<section
@@ -217,16 +305,43 @@
 			class="contact">
 			<div class="container">
 				<h2 class="section-title">Get In Touch</h2>
-				<div class="contact-form">
-					<input
-						type="email"
-						placeholder="Your Email"
-						required />
-					<textarea
-						placeholder="Your Message"
-						rows="5"
-						required></textarea>
-					<button class="btn btn-primary">Send Message</button>
+				<div class="contact-options">
+					<p style="color: var(--text-light); margin-bottom: 0.5rem">
+						To purchase our products or request services please use
+						one of the following methods. We accept orders via
+						Google Form, Discord ticket or WhatsApp. A 50% advance
+						payment is required to start work or deliver paid
+						software.
+					</p>
+					<div class="contact-buttons">
+						<a
+							class="btn btn-primary"
+							href="#"
+							id="googleFormBtn"
+							>Order via Google Form</a
+						>
+						<a
+							class="btn btn-primary"
+							href="#"
+							id="discordBtn"
+							>Open Discord Ticket</a
+						>
+						<a
+							class="btn btn-primary whatsapp-btn"
+							id="whatsappBtn"
+							href="https://wa.me/919830175297?text=Hi"
+							target="_blank"
+							rel="noopener noreferrer"
+							><i class="fab fa-whatsapp"></i> Message on
+							WhatsApp</a
+						>
+					</div>
+					<p style="color: var(--text-light); margin-top: 0.75rem">
+						After placing an order please send proof of 50% advance
+						payment in the same channel (Google Form confirmation /
+						Discord ticket / WhatsApp). We'll complete and deliver
+						the remaining upon final payment.
+					</p>
 				</div>
 			</div>
 		</section>
