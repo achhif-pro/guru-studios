@@ -7,7 +7,7 @@ const products = [
 		price: 29.99,
 		badge: "PAID",
 		description: "The fastest and safest Android emulator for PC",
-		image: "assets/images/bluestacks4.svg",
+		image: "assets/images/BS4.jpg",
 		features: [
 			"High performance Android emulation",
 			"Full game controller support",
@@ -22,7 +22,7 @@ const products = [
 		price: 39.99,
 		badge: "LATEST",
 		description: "Latest version with enhanced performance and features",
-		image: "assets/images/bluestacks5.svg",
+		image: "assets/images/BS5.jpeg",
 		features: [
 			"Ultra-fast performance",
 			"Modern UI & UX",
@@ -38,7 +38,7 @@ const products = [
 		price: 24.99,
 		badge: "PAID",
 		description: "Professional mobile streaming utility",
-		image: "assets/images/msi4.svg",
+		image: "assets/images/msi4.jpg",
 		features: [
 			"Mobile to PC streaming",
 			"Game optimization",
@@ -53,7 +53,7 @@ const products = [
 		price: 34.99,
 		badge: "LATEST",
 		description: "Next-generation mobile streaming with advanced features",
-		image: "assets/images/msi5.svg",
+		image: "assets/images/msi5.jpg",
 		features: [
 			"Ultra-fast streaming",
 			"AI optimization",
@@ -69,7 +69,7 @@ const products = [
 		price: 19.99,
 		badge: "POPULAR",
 		description: "Lightweight and powerful Android emulator",
-		image: "assets/images/emulator.svg",
+		image: "assets/images/Android Emulator Pro.jpg",
 		features: [
 			"Lightweight installation",
 			"Quick startup time",
@@ -86,7 +86,7 @@ const products = [
 		price: 49.99,
 		badge: "LITE",
 		description: "Optimized Windows 10 Pro with reduced bloatware",
-		image: "assets/images/windows10lite.svg",
+		image: "assets/images/Windows 10 Pro Lite.jpeg",
 		features: [
 			"Reduced bloatware",
 			"Faster performance",
@@ -101,7 +101,7 @@ const products = [
 		price: 59.99,
 		badge: "FULL",
 		description: "Complete Windows 10 Pro with all features",
-		image: "assets/images/windows10full.svg",
+		image: "assets/images/Windows 10 Pro (Full).jpg",
 		features: [
 			"Full Windows features",
 			"Enterprise ready",
@@ -116,7 +116,7 @@ const products = [
 		price: 69.99,
 		badge: "LITE",
 		description: "Optimized Windows 11 Pro - faster and cleaner",
-		image: "assets/images/windows11lite.svg",
+		image: "assets/images/Windows 11 Pro Lite.jpg",
 		features: [
 			"Optimized for speed",
 			"Modern UI",
@@ -131,7 +131,7 @@ const products = [
 		price: 79.99,
 		badge: "LATEST",
 		description: "Complete Windows 11 Pro with all latest features",
-		image: "assets/images/windows11full.svg",
+		image: "assets/images/Windows 11 Pro (Full).jpeg",
 		features: [
 			"Latest Windows 11",
 			"AI integration",
@@ -146,7 +146,7 @@ const products = [
 		price: 39.99,
 		badge: "FREE+",
 		description: "Ubuntu with all drivers pre-installed",
-		image: "assets/images/ubuntu.svg",
+		image: "assets/images/Ubuntu Linux Pro.jpg",
 		features: [
 			"Latest Ubuntu LTS",
 			"All drivers included",
@@ -161,7 +161,7 @@ const products = [
 		price: 34.99,
 		badge: "DISTRO",
 		description: "Debian with optimized drivers and packages",
-		image: "assets/images/debian.svg",
+		image: "assets/images/Debian Linux Complete.jpeg",
 		features: [
 			"Stable Debian release",
 			"Pre-configured drivers",
@@ -176,7 +176,7 @@ const products = [
 		price: 29.99,
 		badge: "DISTRO",
 		description: "Latest Fedora with cutting-edge software",
-		image: "assets/images/fedora.svg",
+		image: "assets/images/Fedora Linux Advanced.png",
 		features: [
 			"Latest Fedora release",
 			"Modern development tools",
@@ -193,7 +193,7 @@ const products = [
 		price: 79.99,
 		badge: "DESIGN",
 		description: "Custom professional logo design service",
-		image: "assets/images/logo_design.svg",
+		image: "assets/images/Professional Logo Design.gif",
 		features: [
 			"Custom design",
 			"3-4 revision rounds",
@@ -208,7 +208,7 @@ const products = [
 		price: 299.99,
 		badge: "DESIGN",
 		description: "Complete website design with modern UI/UX",
-		image: "assets/images/website_design.svg",
+		image: "assets/images/Website Design Package.jpeg",
 		features: [
 			"Responsive design",
 			"SEO optimized",
@@ -223,7 +223,7 @@ const products = [
 		price: 499.99,
 		badge: "DEVELOP",
 		description: "Full website development with backend",
-		image: "assets/images/website_dev.svg",
+		image: "assets/images/Website Development.png",
 		features: [
 			"Frontend + Backend",
 			"Database setup",
@@ -238,7 +238,7 @@ const products = [
 		price: 99.99,
 		badge: "MEDIA",
 		description: "Professional video editing and post-production",
-		image: "assets/images/video_edit.svg",
+		image: "assets/images/Video Editing Service.jpg",
 		features: [
 			"Color grading",
 			"Effects & transitions",
@@ -253,7 +253,7 @@ const products = [
 		price: 49.99,
 		badge: "MEDIA",
 		description: "Professional photo editing and retouching",
-		image: "assets/images/photo_edit.svg",
+		image: "assets/images/Photo Editing & Enhancement.jpeg",
 		features: [
 			"Retouching included",
 			"Background removal",
@@ -270,7 +270,7 @@ const products = [
 		price: 9.99,
 		badge: "GAMING",
 		description: "Optimized sensitivity settings for Free Fire",
-		image: "assets/images/free_fire_sens.svg",
+		image: "assets/images/Free Fire Paid Sensitivity.jpg",
 		features: [
 			"Pro player settings",
 			"HD graphics optimized",
@@ -285,7 +285,7 @@ const products = [
 		price: 29.99,
 		badge: "UTILITY",
 		description: "Complete PC optimization and cleanup",
-		image: "assets/images/pc_optimization.svg",
+		image: "assets/images/PC Optimization Service.jpeg",
 		features: [
 			"Performance boost",
 			"Registry cleanup",
@@ -300,7 +300,7 @@ const products = [
 		price: 149.99,
 		badge: "DEVELOP",
 		description: "Custom Discord bot with advanced features",
-		image: "assets/images/discord_bot.svg",
+		image: "assets/images/Discord Bot Development.jpg",
 		features: [
 			"Custom commands",
 			"Moderation tools",
@@ -315,7 +315,7 @@ const products = [
 		price: 59.99,
 		badge: "DEVELOP",
 		description: "Advanced TCP bot with multiple features",
-		image: "assets/images/tcp_bot.svg",
+		image: "assets/images/TCP Bot Package.jpg",
 		features: [
 			"Multi-function bot",
 			"Auto-management",
@@ -330,7 +330,7 @@ const products = [
 		price: 129.99,
 		badge: "PANEL",
 		description: "Complete gaming panel management system",
-		image: "assets/images/free_fire_panel.svg",
+		image: "assets/images/Free Fire Gaming Panel.jpg",
 		features: [
 			"User dashboard",
 			"Account management",
@@ -346,7 +346,7 @@ const products = [
 		price: 19.99,
 		badge: "TERMINAL",
 		description: "Professional Windows Terminal themes and configurations",
-		image: "assets/images/windows_terminal.svg",
+		image: "assets/images/Windows Terminal Customization.png",
 		features: [
 			"20+ custom themes",
 			"PowerShell profiles",
@@ -362,7 +362,7 @@ const products = [
 		price: 14.99,
 		badge: "TERMINAL",
 		description: "Beautiful Bash, Zsh, and Fish shell configurations",
-		image: "assets/images/linux_terminal.svg",
+		image: "assets/images/Linux Terminal Customization.jpg",
 		features: [
 			"15+ shell themes",
 			".bashrc/.zshrc configs",
@@ -378,7 +378,7 @@ const products = [
 		price: 24.99,
 		badge: "TERMINAL",
 		description: "Premium macOS terminal themes and utilities",
-		image: "assets/images/mac_terminal.svg",
+		image: "assets/images/macOS Terminal Pro.jpeg",
 		features: [
 			"iTerm2 themes",
 			"Homebrew optimization",
@@ -394,7 +394,7 @@ const products = [
 		price: 9.99,
 		badge: "FONTS",
 		description: "50+ terminal fonts and icon packs",
-		image: "assets/images/terminal_fonts.svg",
+		image: "assets/images/Terminal Icons & Fonts Pack.jpg",
 		features: [
 			"Nerd fonts collection",
 			"Icon packs included",
@@ -410,7 +410,7 @@ const products = [
 		price: 29.99,
 		badge: "EDITOR",
 		description: "Complete NeoVim configuration with plugins",
-		image: "assets/images/neovim_setup.svg",
+		image: "assets/images/NeoVim Complete Setup.jpg",
 		features: [
 			"Pre-configured plugins",
 			"LSP setup included",
@@ -426,7 +426,7 @@ const products = [
 		price: 12.99,
 		badge: "EDITOR",
 		description: "Advanced VS Code integrated terminal themes",
-		image: "assets/images/vscode_terminal.svg",
+		image: "assets/images/VS Code Terminal Pro.png",
 		features: [
 			"10+ terminal themes",
 			"Font optimization",
@@ -442,7 +442,7 @@ const products = [
 		price: 11.99,
 		badge: "PROMPT",
 		description: "Custom shell prompts for any OS",
-		image: "assets/images/shell_prompt.svg",
+		image: "assets/images/Shell Prompt Customization.png",
 		features: [
 			"30+ prompt designs",
 			"Git integration",
@@ -458,7 +458,7 @@ const products = [
 		price: 17.99,
 		badge: "DOCKER",
 		description: "Optimized terminal environment for Docker",
-		image: "assets/images/docker_terminal.svg",
+		image: "assets/images/Docker Terminal Setup.png",
 		features: [
 			"Docker aliases",
 			"Container monitoring",
