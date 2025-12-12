@@ -5,10 +5,13 @@
 		<meta
 			name="viewport"
 			content="width=device-width, initial-scale=1.0" />
-		<title>Guru Studios - Premium Software & Services</title>
+		<title>EKBAL STUDIO - Premium Software & Services</title>
 		<link
 			rel="stylesheet"
 			href="css/style.css" />
+		<link
+			rel="icon"
+			href="assets/images/favicon.svg" />
 		<link
 			rel="stylesheet"
 			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
@@ -19,7 +22,7 @@
 			<div class="container">
 				<div class="nav-wrapper">
 					<div class="logo">
-						<h1>Guru Studios</h1>
+						<h1>EKBAL STUDIO</h1>
 					</div>
 					<ul class="nav-menu">
 						<li>
@@ -68,6 +71,12 @@
 					<div class="nav-icons">
 						<a
 							href="#"
+							class="discount-banner"
+							id="navDiscountBanner"
+							>30% OFF — Claim</a
+						>
+						<a
+							href="#"
 							class="nav-icon cart-icon"
 							><i class="fas fa-shopping-cart"></i
 							><span class="cart-count">0</span></a
@@ -83,7 +92,7 @@
 			class="hero">
 			<div class="animated-background"></div>
 			<div class="hero-content">
-				<h2>Welcome to Guru Studios</h2>
+				<h2>Welcome to EKBAL STUDIO</h2>
 				<p>Premium Software, Services & Digital Solutions</p>
 				<button
 					class="btn btn-primary"
@@ -160,9 +169,12 @@
 						<h2 id="modalTitle"></h2>
 						<p id="modalDescription"></p>
 						<div class="modal-price">
-							<span
-								id="modalPrice"
-								class="price"></span>
+							<div
+								class="modal-original-price"
+								id="modalOriginalPrice"></div>
+							<div
+								class="modal-discount-price"
+								id="modalPrice"></div>
 						</div>
 						<div class="modal-terms">
 							<p style="color: var(--text-light)">
@@ -203,6 +215,22 @@
 			</div>
 		</div>
 
+		<!-- Discount Popup Modal -->
+		<div id="discountModal" class="modal">
+			<div class="modal-content discount-modal">
+				<span class="close" id="discountClose">&times;</span>
+				<div class="discount-body">
+					<h2>Limited Time Offer! 🎉</h2>
+					<p>
+						Get <strong>30% OFF</strong> on all products site-wide. Use code
+						<strong>EKBAL30</strong> at checkout.
+					</p>
+					<button class="btn btn-primary" id="claimCouponBtn">Claim Coupon</button>
+					<p class="small">Offer valid for a limited time. Applies once per order.</p>
+				</div>
+			</div>
+		</div>
+
 		<!-- Cart Sidebar -->
 		<div
 			class="cart-sidebar"
@@ -218,6 +246,26 @@
 				<div class="cart-total">
 					<strong>Total: </strong>
 					<span id="cartTotal">$0.00</span>
+				</div>
+				<div class="coupon-row">
+					<input
+						type="text"
+						id="couponInput"
+						placeholder="Enter coupon code"
+						aria-label="Coupon Code" />
+					<button
+						class="btn btn-secondary"
+						id="applyCouponBtn">
+						Apply
+					</button>
+					<button
+						class="btn btn-tertiary"
+						id="clearCouponBtn">
+						Clear
+					</button>
+					<div
+						id="couponMessage"
+						class="coupon-message"></div>
 				</div>
 				<button
 					class="btn btn-primary btn-block"
@@ -237,11 +285,7 @@
 			id="checkoutModal"
 			class="modal">
 			<div class="modal-content">
-				<span
-					class="close"
-					id="checkoutClose"
-					>&times;</span
-				>
+				<span class="close" id="checkoutClose">&times;</span>
 				<div style="padding: 1.5rem; color: var(--text-light)">
 					<h3>Checkout Instructions</h3>
 					<p>
@@ -290,7 +334,7 @@
 				<h2 class="section-title">About Us</h2>
 				<div class="about-content">
 					<p>
-						Guru Studios is your one-stop destination for premium
+						EKBAL STUDIO is your one-stop destination for premium
 						software, operating systems, design services, and
 						digital solutions. We provide high-quality products at
 						competitive prices with excellent customer support.
@@ -300,9 +344,7 @@
 		</section>
 
 		<!-- Contact Section -->
-		<section
-			id="contact"
-			class="contact">
+		<section id="contact" class="contact">
 			<div class="container">
 				<h2 class="section-title">Get In Touch</h2>
 				<div class="contact-options">
@@ -314,28 +356,17 @@
 						software.
 					</p>
 					<div class="contact-buttons">
-						<a
-							class="btn btn-primary"
-							href="#"
-							id="googleFormBtn"
-							>Order via Google Form</a
-						>
-						<a
-							class="btn btn-primary"
-							href="#"
-							id="discordBtn"
-							>Open Discord Ticket</a
-						>
-						<a
-							class="btn btn-primary whatsapp-btn"
-							id="whatsappBtn"
-							href="https://wa.me/919830175297?text=Hi"
-							target="_blank"
-							rel="noopener noreferrer"
-							><i class="fab fa-whatsapp"></i> Message on
-							WhatsApp</a
-						>
+						<a class="btn btn-primary" href="#" id="googleFormBtn">Order via Google Form</a>
+						<a class="btn btn-primary" href="#" id="discordBtn">Open Discord Ticket</a>
+						<a class="btn btn-primary whatsapp-btn" id="whatsappBtn" href="https://wa.me/919830175297?text=Hi" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> Message on WhatsApp</a>
 					</div>
+					<p style="color: var(--text-light); margin-top: 0.75rem">
+						After placing an order please send proof of 50% advance
+						payment in the same channel (Google Form confirmation / Discord ticket / WhatsApp). We'll complete and deliver the remaining upon final payment.
+					</p>
+				</div>
+			</div>
+		</section>
 					<p style="color: var(--text-light); margin-top: 0.75rem">
 						After placing an order please send proof of 50% advance
 						payment in the same channel (Google Form confirmation /
@@ -351,7 +382,7 @@
 			<div class="container">
 				<div class="footer-content">
 					<div class="footer-section">
-						<h4>Guru Studios</h4>
+						<h4>EKBAL STUDIO</h4>
 						<p>Premium Software & Digital Solutions</p>
 					</div>
 					<div class="footer-section">
@@ -372,12 +403,13 @@
 					</div>
 				</div>
 				<div class="footer-bottom">
-					<p>&copy; 2025 Guru Studios. All rights reserved.</p>
+					<p>&copy; 2025 EKBAL STUDIO. All rights reserved.</p>
 				</div>
 			</div>
 		</footer>
 
 		<script src="js/products.js"></script>
+		<script src="js/mouse-tracker.js"></script>
 		<script src="js/script.js"></script>
 	</body>
 </html>

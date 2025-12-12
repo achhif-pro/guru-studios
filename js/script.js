@@ -2,12 +2,23 @@
 let cart = [];
 let currentFilter = "all";
 let selectedProduct = null;
+// Coupon and discount state
+let cartDiscountPercent = 0;
+let appliedCoupon = null;
+// Site-wide discount applied to displayed prices (percentage)
+const siteDiscountPercent = 30; // 30% off on all products site-wide
 
 // ============ Initialize Application ============
 document.addEventListener("DOMContentLoaded", () => {
 	renderProducts("all");
 	setupEventListeners();
 	loadCartFromStorage();
+	// Show discount popup if not seen
+	const seen = localStorage.getItem("seenDiscountPopup");
+	const discountModal = document.getElementById("discountModal");
+	if (!seen && discountModal) {
+		discountModal.style.display = "block";
+	}
 });
 
 // ============ Setup Event Listeners ============
@@ -160,6 +171,63 @@ function setupEventListeners() {
 				);
 			});
 	});
+
+	// Coupon apply handler (in cart sidebar)
+	const applyCouponBtn = document.getElementById("applyCouponBtn");
+	const couponInput = document.getElementById("couponInput");
+	if (applyCouponBtn && couponInput) {
+		applyCouponBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			applyCoupon(couponInput.value.trim());
+		});
+	}
+
+	const clearCouponBtn = document.getElementById("clearCouponBtn");
+	if (clearCouponBtn) {
+		clearCouponBtn.addEventListener("click", (e) => {
+			e.preventDefault();
+			appliedCoupon = null;
+			cartDiscountPercent = 0;
+			localStorage.removeItem("appliedCoupon");
+			localStorage.removeItem("cartDiscountPercent");
+			const couponDiv = document.getElementById("couponMessage");
+			if (couponDiv) {
+				couponDiv.classList.remove("success", "error");
+				couponDiv.textContent = "";
+			}
+			if (couponInput) couponInput.value = "";
+			updateCartUI();
+			showNotification("Coupon removed", "info");
+		});
+	}
+
+	// Discount popup handlers
+	const discountModal = document.getElementById("discountModal");
+	const discountClose = document.getElementById("discountClose");
+	const claimCouponBtn = document.getElementById("claimCouponBtn");
+	const navDiscountBanner = document.getElementById("navDiscountBanner");
+	if (discountClose) {
+		discountClose.addEventListener("click", () => {
+			if (discountModal) {
+				discountModal.style.display = "none";
+				localStorage.setItem("seenDiscountPopup", "true");
+			}
+		});
+	}
+	if (navDiscountBanner && discountModal) {
+		navDiscountBanner.addEventListener("click", (e) => {
+			e.preventDefault();
+			discountModal.style.display = "block";
+		});
+	}
+	if (claimCouponBtn) {
+		claimCouponBtn.addEventListener("click", () => {
+			if (couponInput) couponInput.value = "EKBAL30";
+			applyCoupon("EKBAL30");
+			localStorage.setItem("seenDiscountPopup", "true");
+			if (discountModal) discountModal.style.display = "none";
+		});
+	}
 }
 
 // ============ Render Products ============
@@ -193,8 +261,14 @@ function createProductCard(product) {
             <div class="product-category">${categories[product.category]}</div>
             <h3 class="product-name">${product.name}</h3>
             <p class="product-description">${product.description}</p>
-            <div class="product-footer">
-                <span class="product-price">$${product.price.toFixed(2)}</span>
+				<div class="product-footer">
+					<div>
+						<div class="product-original-price">$${product.price.toFixed(2)}</div>
+						<div class="product-discount-price">$${(
+							product.price *
+							(1 - siteDiscountPercent / 100)
+						).toFixed(2)}</div>
+					</div>
                 <button class="product-btn">🛒 Buy Now</button>
             </div>
         </div>
@@ -220,9 +294,16 @@ function openModal(product) {
 	document.getElementById("modalTitle").textContent = product.name;
 	document.getElementById("modalDescription").textContent =
 		product.description;
-	document.getElementById(
-		"modalPrice"
-	).textContent = `$${product.price.toFixed(2)}`;
+	// Modal shows original and discounted price
+	const modalOriginal = document.getElementById("modalOriginalPrice");
+	const modalPrice = document.getElementById("modalPrice");
+	if (modalOriginal)
+		modalOriginal.textContent = `$${product.price.toFixed(2)}`;
+	if (modalPrice)
+		modalPrice.textContent = `$${(
+			product.price *
+			(1 - siteDiscountPercent / 100)
+		).toFixed(2)}`;
 	const modalImage = document.getElementById("modalImage");
 	modalImage.src = product.image;
 	modalImage.alt = product.name;
@@ -251,8 +332,14 @@ function addToCart() {
 	if (existingItem) {
 		existingItem.quantity += 1;
 	} else {
+		const discountedPrice = +(
+			selectedProduct.price *
+			(1 - siteDiscountPercent / 100)
+		).toFixed(2);
 		cart.push({
 			...selectedProduct,
+			originalPrice: selectedProduct.price,
+			price: discountedPrice,
 			quantity: 1,
 		});
 	}
@@ -287,10 +374,14 @@ function updateCartUI() {
 	}
 
 	// Display cart items
-	let total = 0;
+	let subtotal = 0;
+	let originalSubtotal = 0;
 	cart.forEach((item) => {
 		const itemTotal = item.price * item.quantity;
-		total += itemTotal;
+		subtotal += itemTotal;
+		const itemOriginalTotal =
+			(item.originalPrice || item.price) * item.quantity;
+		originalSubtotal += itemOriginalTotal;
 
 		const cartItem = document.createElement("div");
 		cartItem.className = "cart-item";
@@ -300,7 +391,12 @@ function updateCartUI() {
                 <span style="color: var(--text-light);">Qty: <strong>${
 					item.quantity
 				}</strong></span>
-                <span class="cart-item-price">$${itemTotal.toFixed(2)}</span>
+				<div style="text-align:right;">
+					<div class="cart-item-original">$${(item.originalPrice || item.price).toFixed(
+						2
+					)}</div>
+					<div class="cart-item-discount">$${itemTotal.toFixed(2)}</div>
+				</div>
             </div>
             <button onclick="removeFromCart(${item.id})" style="
                 width: 100%;
@@ -319,9 +415,111 @@ function updateCartUI() {
 		cartItems.appendChild(cartItem);
 	});
 
-	// Update total and count
-	cartTotal.textContent = `$${total.toFixed(2)}`;
+	// Apply discount if any
+	let finalTotal = subtotal;
+	const couponDiv = document.getElementById("couponMessage");
+	if (cartDiscountPercent > 0 && appliedCoupon) {
+		const discountAmount = (subtotal * cartDiscountPercent) / 100;
+		finalTotal = subtotal - discountAmount;
+		// Show a breakdown: original -> site-discounted -> coupon -> final
+		cartTotal.innerHTML = `
+			<div style="font-size:0.9rem;color:var(--text-light);">Original: <s>$${originalSubtotal.toFixed(
+				2
+			)}</s></div>
+			<div style="font-size:0.95rem;color:var(--text-light);">Subtotal (site discount applied): $${subtotal.toFixed(
+				2
+			)}</div>
+			<div style="font-size:0.95rem;color:var(--accent-gold);">Coupon ${appliedCoupon} applied — ${cartDiscountPercent}% off</div>
+			<div style="font-weight:700;font-size:1.05rem;margin-top:6px;">Total: $${finalTotal.toFixed(
+				2
+			)}</div>
+		`;
+		if (couponDiv) {
+			couponDiv.classList.add("success");
+			couponDiv.textContent = `Coupon ${appliedCoupon} applied — ${cartDiscountPercent}% off!`;
+		}
+	} else {
+		// No coupon applied — show subtotal and possibly the original price if site discount exists
+		cartTotal.textContent = `$${subtotal.toFixed(2)}`;
+		if (originalSubtotal && originalSubtotal > subtotal) {
+			cartTotal.textContent += ` (was $${originalSubtotal.toFixed(2)})`;
+		}
+		if (couponDiv) {
+			couponDiv.classList.remove("success");
+			couponDiv.textContent = ``;
+		}
+	}
+	// If original total differs, show original struck-through (e.g., site discount applied site-wide)
+	if (originalSubtotal && originalSubtotal > subtotal) {
+		cartTotal.textContent += ` (was $${originalSubtotal.toFixed(2)})`;
+	}
 	cartCount.textContent = cart.length;
+}
+
+// Coupon function
+function applyCoupon(code) {
+	const normalized = (code || "").toString().trim().toUpperCase();
+	const couponDiv = document.getElementById("couponMessage");
+	if (!normalized) {
+		if (couponDiv) {
+			couponDiv.classList.add("error");
+			couponDiv.textContent = "Please enter a coupon code";
+		}
+		showNotification("Please enter a coupon code", "error");
+		return false;
+	}
+	if (normalized === "EKBAL30") {
+		appliedCoupon = normalized;
+		if (siteDiscountPercent === 30) {
+			cartDiscountPercent = 0; // no extra discount, already applied site-wide
+			if (couponDiv) {
+				couponDiv.classList.add("success");
+				couponDiv.textContent = `Coupon ${appliedCoupon} recognized — 30% site-wide discount is already applied.`;
+			}
+			showNotification(
+				"Coupon recognized — site discount already applied",
+				"info"
+			);
+			saveCartToStorage();
+			updateCartUI();
+			return true;
+		} else {
+			cartDiscountPercent = 30;
+			if (couponDiv) {
+				couponDiv.classList.add("success");
+				couponDiv.textContent = `Coupon ${appliedCoupon} applied — 30% off!`;
+			}
+			showNotification("Coupon applied — 30% off", "success");
+			saveCartToStorage();
+			updateCartUI();
+			return true;
+		}
+	}
+	if (normalized === "DISCOUNT30" || normalized === "EXTRA30") {
+		cartDiscountPercent = 30;
+		appliedCoupon = normalized;
+		localStorage.setItem("appliedCoupon", appliedCoupon);
+		localStorage.setItem(
+			"cartDiscountPercent",
+			String(cartDiscountPercent)
+		);
+		if (couponDiv) {
+			couponDiv.classList.add("success");
+			couponDiv.textContent = `Coupon ${appliedCoupon} applied — ${cartDiscountPercent}% off!`;
+		}
+		showNotification(
+			`Coupon applied — ${cartDiscountPercent}% off`,
+			"success"
+		);
+		updateCartUI();
+		return true;
+	}
+	if (couponDiv) {
+		couponDiv.classList.add("error");
+		couponDiv.textContent = "Invalid coupon code";
+	}
+	showNotification("Invalid coupon", "error");
+	return false;
 }
 
 function toggleCart() {
@@ -340,12 +538,31 @@ function closeCart() {
 
 function saveCartToStorage() {
 	localStorage.setItem("cart", JSON.stringify(cart));
+	if (appliedCoupon) {
+		localStorage.setItem("appliedCoupon", appliedCoupon);
+		localStorage.setItem(
+			"cartDiscountPercent",
+			String(cartDiscountPercent)
+		);
+	} else {
+		localStorage.removeItem("appliedCoupon");
+		localStorage.removeItem("cartDiscountPercent");
+	}
 }
 
 function loadCartFromStorage() {
 	const storedCart = localStorage.getItem("cart");
 	if (storedCart) {
 		cart = JSON.parse(storedCart);
+		updateCartUI();
+	}
+	// Load coupon state if any
+	const storedCoupon = localStorage.getItem("appliedCoupon");
+	if (storedCoupon) {
+		appliedCoupon = storedCoupon;
+		cartDiscountPercent =
+			Number(localStorage.getItem("cartDiscountPercent")) || 0;
+		// Refresh UI to display discount
 		updateCartUI();
 	}
 }
@@ -473,7 +690,9 @@ window.addEventListener("scroll", () => {
 
 // ============ Price Filter Functionality ============
 function filterByPrice(maxPrice) {
-	const filtered = products.filter((p) => p.price <= maxPrice);
+	const filtered = products.filter(
+		(p) => p.price * (1 - siteDiscountPercent / 100) <= maxPrice
+	);
 	const productsGrid = document.getElementById("productsGrid");
 	productsGrid.innerHTML = "";
 	filtered.forEach((product) => {

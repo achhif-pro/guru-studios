@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#f5f5f5"/>
+  <rect x="20" y="40" width="160" height="120" rx="8" fill="white" stroke="#dc143c" stroke-width="2"/>
+  <rect x="20" y="40" width="160" height="30" rx="8" fill="#dc143c"/>
+  <circle cx="35" cy="55" r="3" fill="white"/>
+  <circle cx="45" cy="55" r="3" fill="white"/>
+  <circle cx="55" cy="55" r="3" fill="white"/>
+  <text x="100" y="60" font-family="Arial" font-size="14" font-weight="bold" fill="white" text-anchor="middle">Gmail Pro</text>
+  <path d="M 25 75 L 95 110 L 165 75" stroke="#dc143c" stroke-width="2" fill="none"/>
+  <line x1="25" y1="75" x2="25" y2="155" stroke="#e0e0e0" stroke-width="1"/>
+  <line x1="165" y1="75" x2="165" y2="155" stroke="#e0e0e0" stroke-width="1"/>
+  <rect x="30" y="80" width="135" height="12" rx="2" fill="#ffeaea" opacity="0.7"/>
+  <rect x="30" y="95" width="135" height="12" rx="2" fill="#fff0f0" opacity="0.7"/>
+  <rect x="30" y="110" width="135" height="12" rx="2" fill="#fff5f5" opacity="0.7"/>
+  <circle cx="170" cy="180" r="15" fill="#dc143c"/>
+  <text x="170" y="185" font-family="Arial" font-size="20" fill="white" text-anchor="middle" font-weight="bold">@</text>
+</svg>

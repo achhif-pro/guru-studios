@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <rect width="200" height="200" fill="#f5f5f5"/>
+  <circle cx="60" cy="60" r="40" fill="white" stroke="#dc143c" stroke-width="2"/>
+  <path d="M 40 60 A 20 20 0 0 1 80 60" stroke="#dc143c" stroke-width="2.5" fill="none"/>
+  <circle cx="55" cy="50" r="2.5" fill="#dc143c"/>
+  <circle cx="65" cy="50" r="2.5" fill="#dc143c"/>
+  <path d="M 50 65 Q 60 70 70 65" stroke="#dc143c" stroke-width="1.5" fill="none"/>
+  
+  <rect x="110" y="30" width="70" height="70" rx="8" fill="white" stroke="#dc143c" stroke-width="2"/>
+  <circle cx="130" cy="45" r="8" fill="#dc143c" opacity="0.8"/>
+  <circle cx="150" cy="45" r="8" fill="#ff6b6b" opacity="0.8"/>
+  <circle cx="170" cy="45" r="8" fill="#8b0000" opacity="0.8"/>
+  <line x1="120" y1="65" x2="175" y2="65" stroke="#e0e0e0" stroke-width="1"/>
+  <text x="145" y="85" font-family="Arial" font-size="10" fill="#666" text-anchor="middle">Follow Us</text>
+  <circle cx="130" cy="90" r="3" fill="#dc143c"/>
+  <circle cx="147" cy="90" r="3" fill="#dc143c"/>
+  <circle cx="164" cy="90" r="3" fill="#dc143c"/>
+  
+  <rect x="20" y="120" width="160" height="60" rx="6" fill="white" stroke="#dc143c" stroke-width="2"/>
+  <text x="100" y="140" font-family="Arial" font-size="12" font-weight="bold" fill="#dc143c" text-anchor="middle">Profile Growth</text>
+  <text x="100" y="155" font-family="Arial" font-size="10" fill="#666" text-anchor="middle">Twitter • Instagram • LinkedIn</text>
+  <text x="100" y="170" font-family="Arial" font-size="10" fill="#666" text-anchor="middle">TikTok • Facebook • YouTube</text>
+</svg>
