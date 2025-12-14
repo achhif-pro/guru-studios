@@ -335,6 +335,93 @@ body {
 	box-shadow: 0 6px 20px rgba(220, 20, 60, 0.6);
 }
 
+/* Discord link specific styling: centered and more animated on hover */
+.discord-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	padding: 12px 26px;
+	border-radius: 8px;
+	transition: transform 260ms cubic-bezier(0.2, 0.9, 0.2, 1),
+		box-shadow 260ms ease, filter 260ms ease;
+	will-change: transform, box-shadow;
+	margin: 0.25rem auto;
+}
+.discord-link:hover {
+	transform: translateY(-6px) scale(1.03) rotate(-0.5deg);
+	box-shadow: 0 14px 30px rgba(102, 51, 153, 0.18),
+		0 6px 20px rgba(220, 20, 60, 0.12);
+	filter: saturate(1.04) brightness(1.03);
+}
+.discord-link:active {
+	transform: translateY(-2px) scale(0.995);
+}
+
+/* a small floating pulse for the icon inside discord link on hover */
+.discord-link .discord-icon {
+	width: 18px;
+	height: 18px;
+}
+
+/* Product title + icon */
+.product-name {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	font-size: 1.05rem;
+	margin: 0.15rem 0;
+}
+.product-icon {
+	width: 20px;
+	height: 20px;
+	flex: 0 0 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* Make sure icons and text scale down on small screens */
+@media (max-width: 600px) {
+	.product-icon {
+		width: 16px;
+		height: 16px;
+		flex: 0 0 16px;
+	}
+	.product-name {
+		font-size: 0.98rem;
+	}
+	.discord-link {
+		padding: 10px 18px;
+	}
+}
+
+@keyframes discordBounce {
+	0% {
+		transform: translateY(0);
+	}
+	30% {
+		transform: translateY(-6px);
+	}
+	60% {
+		transform: translateY(-2px);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+.discord-link:hover .discord-icon {
+	animation: discordBounce 520ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Contact buttons group alignment */
+.contact-buttons {
+	display: flex;
+	gap: 1rem;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
 .btn-block {
 	width: 100%;
 	margin-top: 1rem;

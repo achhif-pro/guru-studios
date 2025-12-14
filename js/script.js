@@ -152,6 +152,8 @@ function setupEventListeners() {
 	const checkoutGoogleForm = document.getElementById("checkoutGoogleForm");
 	const checkoutDiscord = document.getElementById("checkoutDiscord");
 
+	const DISCORD_INVITE = "https://discord.gg/Gy25h8aGX3";
+
 	// Placeholder: these open '#' by default. You can replace href values with real links.
 	[googleFormBtn, checkoutGoogleForm].forEach((el) => {
 		if (el)
@@ -165,10 +167,9 @@ function setupEventListeners() {
 	[discordBtn, checkoutDiscord].forEach((el) => {
 		if (el)
 			el.addEventListener("click", (e) => {
+				// Open the Discord invite in a new tab/window
 				e.preventDefault();
-				showNotification(
-					"Open the Discord ticket link (replace placeholder with real URL)."
-				);
+				window.open(DISCORD_INVITE, "_blank", "noopener");
 			});
 	});
 
@@ -257,9 +258,14 @@ function createProductCard(product) {
 		product.name
 	}" class="product-img" />
         </div>
-        <div class="product-info">
-            <div class="product-category">${categories[product.category]}</div>
-            <h3 class="product-name">${product.name}</h3>
+		<div class="product-info">
+			<div class="product-category">${categories[product.category]}</div>
+			<h3 class="product-name">
+				<svg class="product-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+					<path fill="currentColor" d="M12 2a2 2 0 0 0-1.414.586L4 9.172V20a1 1 0 0 0 1 1h6v-6h6a1 1 0 0 0 1-1V7.414L13.414 2.586A2 2 0 0 0 12 2z"></path>
+				</svg>
+				<span class="product-name-text">${product.name}</span>
+			</h3>
             <p class="product-description">${product.description}</p>
 				<div class="product-footer">
 					<div>
@@ -291,7 +297,12 @@ function createProductCard(product) {
 // ============ Modal Functions ============
 function openModal(product) {
 	const modal = document.getElementById("productModal");
-	document.getElementById("modalTitle").textContent = product.name;
+	document.getElementById("modalTitle").innerHTML = `
+		<svg class="product-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+			<path fill="currentColor" d="M12 2a2 2 0 0 0-1.414.586L4 9.172V20a1 1 0 0 0 1 1h6v-6h6a1 1 0 0 0 1-1V7.414L13.414 2.586A2 2 0 0 0 12 2z"></path>
+		</svg>
+		<span class="product-name-text">${product.name}</span>
+	`;
 	document.getElementById("modalDescription").textContent =
 		product.description;
 	// Modal shows original and discounted price
@@ -386,7 +397,12 @@ function updateCartUI() {
 		const cartItem = document.createElement("div");
 		cartItem.className = "cart-item";
 		cartItem.innerHTML = `
-            <div class="cart-item-name">${item.name}</div>
+			<div class="cart-item-name">
+				<svg class="product-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+					<path fill="currentColor" d="M12 2a2 2 0 0 0-1.414.586L4 9.172V20a1 1 0 0 0 1 1h6v-6h6a1 1 0 0 0 1-1V7.414L13.414 2.586A2 2 0 0 0 12 2z"></path>
+				</svg>
+				${item.name}
+			</div>
             <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
                 <span style="color: var(--text-light);">Qty: <strong>${
 					item.quantity
